@@ -85,7 +85,7 @@ public class UserService {
                     .build();
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apiResult);
         }
-        response.addHeader(JwtUtil.AUTHORIZATION_HEADER,jwtUtil.createToken(user.getUsername()));
+        response.addHeader(JwtUtil.AUTHORIZATION_HEADER,jwtUtil.createToken(user.getUsername(),user.getRole()));
         apiResult = ApiResult.builder()
                 .statusCode(HttpStatus.OK.value())
                 .message("로그인 성공")

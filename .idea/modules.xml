@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Post.iml" filepath="$PROJECT_DIR$/.idea/Post.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Post.Post.iml" filepath="$PROJECT_DIR$/.idea/modules/Post.Post.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Post.Post.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Post.Post.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.example.Post.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.example.Post.main.iml" />
     </modules>
   </component>
 </project>
