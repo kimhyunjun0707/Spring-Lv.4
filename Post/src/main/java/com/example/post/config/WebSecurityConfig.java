@@ -46,14 +46,15 @@ public class WebSecurityConfig {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.authorizeRequests().antMatchers("/api/user/**").permitAll()
-                .antMatchers("/api/search").permitAll()
-                .antMatchers("/api/shop").permitAll()
+                .antMatchers("/api/auth/signup-page").permitAll()
                 .anyRequest().authenticated()
                 // JWT 인증/인가를 사용하기 위한 설정
                 .and().addFilterBefore(new JwtAuthFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
 
-        http.formLogin().permitAll();
+        http.formLogin()
+                .loginProcessingUrl("/api/user/auth/login")
+                .permitAll();
 
         http.exceptionHandling().accessDeniedPage("/api/user/forbidden");
 

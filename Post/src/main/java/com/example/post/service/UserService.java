@@ -26,7 +26,6 @@ public class UserService {
     private static final String ADMIN_TOKEN = "123";
 
     @Transactional
-
     public ResponseEntity<ApiResult> signup(SignupRequestDto signupRequestDto) {
         String username = signupRequestDto.getUsername();
         String password = signupRequestDto.getPassword();
@@ -62,7 +61,7 @@ public class UserService {
         return ResponseEntity.status(HttpStatus.OK).body(apiResult);
     }
 
-
+    @Transactional(readOnly = true)
     public ResponseEntity<ApiResult> login(SignupRequestDto signupRequestDto, HttpServletResponse response) {
         String username = signupRequestDto.getUsername();
         String password = signupRequestDto.getPassword();

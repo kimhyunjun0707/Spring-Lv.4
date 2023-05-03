@@ -5,18 +5,14 @@ import com.example.post.entity.Comment;
 import com.example.post.entity.Post;
 import com.example.post.entity.UserRoleEnum;
 import com.example.post.entity.Users;
-import com.example.post.jwt.JwtUtil;
 import com.example.post.repository.CommentRepository;
 import com.example.post.repository.PostRepository;
-import com.example.post.repository.UserRepository;
-import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @Service
@@ -26,25 +22,20 @@ public class CommentService {
 
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
-    private final TokenService tokenService;
 
 
     //댓글 작성
     @Transactional
-    public CommentResponseDto create(CommentRequestDto commentRequestDto, HttpServletRequest request) {
-
-        Users user = tokenService.checkToken(request);
+    public CommentResponseDto create(CommentRequestDto commentRequestDto,Users user) {
         Post post = postRepository.findById(commentRequestDto.getPostId())
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. "));
-
         Comment comment = commentRepository.saveAndFlush(new Comment(commentRequestDto,post,user));
         return new CommentResponseDto(comment);//Comment response 만들기
     }
 
     //댓글 수정
     @Transactional
-    public ResponseEntity<?> update(Long id,CommentRequestDto commentRequestDto, HttpServletRequest request) {
-        Users user = tokenService.checkToken(request);
+    public ResponseEntity<?> update(Long id,CommentRequestDto commentRequestDto,Users user) {
         Comment comment = commentRepository.findById(id).orElseThrow(
                 () -> new NullPointerException("해당 댓글은 존재하지 않습니다.")
         );
@@ -63,8 +54,7 @@ public class CommentService {
 
     //댃글 삭제
     @Transactional
-    public ResponseEntity<ApiResult> delete(Long id, HttpServletRequest request) {
-        Users user = tokenService.checkToken(request);
+    public ResponseEntity<ApiResult> delete(Long id, Users user) {
         Optional<Comment> optionalComment = commentRepository.findById(id);
         ApiResult apiResult;
 

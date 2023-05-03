@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -35,12 +34,6 @@ public class UserController {
             return userService.signup(signupRequestDto);
         }
     }
-
-    //Status code 200:HttpStatus.OK.value()
-    //200코드는 요청이 성공적으로 처리되었음을 나타냄
-    //Status code 201:HttpStatus.CREATED.value()
-    //201코드는 Created상태를 나타내며 새로운 리소스가 성공적으로 생성되었음을 나타냄
-
     @ResponseBody
     @PostMapping("/auth/login-page")
     public ResponseEntity<ApiResult> loginPage(@RequestBody SignupRequestDto signupRequestDto, HttpServletResponse response){
@@ -48,7 +41,6 @@ public class UserController {
         return userService.login(signupRequestDto,response);
 
     }
-    ///////////스프링 시큐리티////////////////////
 
 
 
